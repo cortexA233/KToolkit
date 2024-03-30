@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MoreMountains.Tools;
 using UnityEngine;
+using EventFramework;
 
 public class UIBasePage : ObserverNoMono
 {

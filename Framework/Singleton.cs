@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EventFramework;
 
 public class Singleton<T> : Observer where T: Singleton<T>, new()
 {
