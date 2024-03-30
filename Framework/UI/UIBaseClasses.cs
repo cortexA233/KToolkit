@@ -4,7 +4,7 @@ using MoreMountains.Tools;
 using UnityEngine;
 using EventFramework;
 
-public class UIBasePage : ObserverNoMono
+public class UIBase : ObserverNoMono
 {
     // 和MonoBehavior的gameObject属性类似，在onStart时初始化
     public GameObject gameObject;
@@ -28,11 +28,10 @@ public class UIBasePage : ObserverNoMono
 }
 
 
-public class UISinglePage : UIBasePage
+public class UIPage : UIBase
 {
     public override void onStart()
     {
         base.onStart();
-        EventManager.SendNotification(EventName.BoxRespawn);
     }
 }

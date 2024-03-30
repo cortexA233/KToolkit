@@ -7,8 +7,8 @@ using Object = UnityEngine.Object;
 
 public partial class UIManager : SingletonNoMono<UIManager>
 {
-    private List<UIBasePage> uiList = new List<UIBasePage>();
-    private List<UIBasePage> pageStack = new List<UIBasePage>();
+    private List<UIBase> uiList = new List<UIBase>();
+    private List<UIBase> pageStack = new List<UIBase>();
     private static int singletonNum = 0;
     public UIManager()
     {
@@ -22,7 +22,7 @@ public partial class UIManager : SingletonNoMono<UIManager>
         AutoInitPageDict();
     }
     
-    public T CreateUI<T>(params object[] args) where T : UIBasePage, new()
+    public T CreateUI<T>(params object[] args) where T : UIBase, new()
     {
         var newPage = new T();
         newPage.gameObject = GameObject.Instantiate(Resources.Load<GameObject>(pageDict[typeof(T)].prefabPath),
@@ -31,17 +31,18 @@ public partial class UIManager : SingletonNoMono<UIManager>
         newPage.InitParams(args);
         uiList.Add(newPage);
         newPage.onStart();
+        KDebugLogger.UI_DebugLog("UI Create: ", pageDict[typeof(T)].name);
         return newPage;
     }
 
-    public void DestroyUI(UIBasePage page)
+    public void DestroyUI(UIBase page)
     {
         uiList.Remove(page);
         Object.Destroy(page.gameObject);
         page.onDestroy();
     }
 
-    public void DestroyFirstUIWithType<T>() where T : UIBasePage
+    public void DestroyFirstUIWithType<T>() where T : UIBase
     {
         for (int i = uiList.Count - 1; i >= 0; i--)
         {
@@ -53,7 +54,7 @@ public partial class UIManager : SingletonNoMono<UIManager>
         }
     }
     
-    public UIBasePage GetFirstUIWithType<T>() where T : UIBasePage
+    public UIBase GetFirstUIWithType<T>() where T : UIBase
     {
         for (int i = uiList.Count - 1; i >= 0; i--)
         {
@@ -73,7 +74,7 @@ public partial class UIManager : SingletonNoMono<UIManager>
         }
     }
 
-    public void DestroyAllUIWithType<T>() where T : UIBasePage
+    public void DestroyAllUIWithType<T>() where T : UIBase
     {
         for (int i = uiList.Count - 1; i >= 0; i--)
         {

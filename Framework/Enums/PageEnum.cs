@@ -46,7 +46,7 @@ public partial class UIManager
     {
         var UIPagesType = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(x => x.GetTypes())
-            .Where(type => type.IsSubclassOf(typeof(UIBasePage)))
+            .Where(type => type.IsSubclassOf(typeof(UIBase)))
             .Where(type => type.GetCustomAttribute<UI_Info>() != null);
         foreach (var type in UIPagesType)
         {
