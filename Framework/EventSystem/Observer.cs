@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EventFramework
+namespace KToolkit
 {
     public abstract class Observer : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MoreMountains.Tools;
 using UnityEngine;
-using EventFramework;
+using KToolkit;
 
 public class UIBase : ObserverNoMono
 {
