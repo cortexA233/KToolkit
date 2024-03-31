@@ -33,4 +33,14 @@ public static partial class KDebugLogger
         string res = "<color=red>Player Log:</color> " + DebuggerConcatArgs(args);
         Debug.Log(res);
     }
+    
+    public static void System_DebugLog(params object[] args)
+    {
+        if (!debuggerConfig["System"])
+        {
+            return;
+        }
+        string res = "<color=green>System Log:</color> " + DebuggerConcatArgs(args);
+        Debug.Log(res);
+    }
 }
