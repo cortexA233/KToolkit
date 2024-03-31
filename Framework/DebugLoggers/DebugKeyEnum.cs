@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugKeyEnum : MonoBehaviour
+public static partial class KDebugLogger
 {
-    // Start is called before the first frame update
-    void Start()
+    private static Dictionary<string, bool> debuggerConfig = new Dictionary<string, bool>();
+
+    static KDebugLogger()
     {
-        
+        debuggerConfig["UI"] = true;
+        debuggerConfig["Battle"] = true;
+        debuggerConfig["System"] = true;
+        debuggerConfig["Player"] = true;
+        debuggerConfig["Level"] = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public static string DebuggerConcatArgs(params object[] args)
     {
-        
+        string res = "";
+        foreach (var item in args)
+        {
+            res += item.ToString();
+            res += "  ";
+        }
+        return res;
     }
 }
