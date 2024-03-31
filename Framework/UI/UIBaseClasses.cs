@@ -6,9 +6,9 @@ using EventFramework;
 
 public class UIBase : ObserverNoMono
 {
-    // 和MonoBehavior的gameObject属性类似，在onStart时初始化
+    // 和MonoBehavior的gameObject属性类似，在OnStart时初始化
     public GameObject gameObject;
-    // 和MonoBehavior的transform属性类似，在onStart时初始化
+    // 和MonoBehavior的transform属性类似，在OnStart时初始化
     public Transform transform;
     
     public virtual void InitParams(params object[] args)
@@ -22,16 +22,17 @@ public class UIBase : ObserverNoMono
         UIManager.instance.DestroyUI(this);
     }
     
-    public virtual void onStart() {}
-    public virtual void onDestroy() {}
+    public virtual void OnStart() {}
+    public virtual void OnDestroy() {}
     public virtual void Update() {}
 }
 
 
 public class UIPage : UIBase
 {
-    public override void onStart()
+    public override void OnStart()
     {
-        base.onStart();
+        base.OnStart();
     }
+    
 }

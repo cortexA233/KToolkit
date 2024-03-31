@@ -30,7 +30,7 @@ public partial class UIManager : SingletonNoMono<UIManager>
         newPage.transform = newPage.gameObject.transform;
         newPage.InitParams(args);
         uiList.Add(newPage);
-        newPage.onStart();
+        newPage.OnStart();
         KDebugLogger.UI_DebugLog("UI Create: ", pageDict[typeof(T)].name);
         return newPage;
     }
@@ -39,7 +39,7 @@ public partial class UIManager : SingletonNoMono<UIManager>
     {
         uiList.Remove(page);
         Object.Destroy(page.gameObject);
-        page.onDestroy();
+        page.OnDestroy();
     }
 
     public void DestroyFirstUIWithType<T>() where T : UIBase
