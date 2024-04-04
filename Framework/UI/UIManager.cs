@@ -24,22 +24,33 @@ public partial class UIManager : SingletonNoMono<UIManager>
     
     public T CreateUI<T>(params object[] args) where T : UIBase, new()
     {
-        var newPage = new T();
-        newPage.gameObject = GameObject.Instantiate(Resources.Load<GameObject>(pageDict[typeof(T)].prefabPath),
+        var newUI = new T();
+        newUI.gameObject = GameObject.Instantiate(Resources.Load<GameObject>(uiMap[typeof(T)].prefabPath),
             GameObject.Find("Canvas").transform);
-        newPage.transform = newPage.gameObject.transform;
-        newPage.InitParams(args);
-        uiList.Add(newPage);
-        newPage.OnStart();
-        KDebugLogger.UI_DebugLog("UI Create: ", pageDict[typeof(T)].name);
-        return newPage;
+        newUI.transform = newUI.gameObject.transform;
+        newUI.InitParams(args);
+        uiList.Add(newUI);
+        newUI.OnStart();
+        if (newUI.isPage)
+        {
+            if (pageStack.Count > 0)
+            {
+                pageStack[pageStack.Count - 1].gameObject.SetActive(false);
+            }
+            pageStack.Add(newUI);
+        }
+        KDebugLogger.UI_DebugLog("UI Create: ", uiMap[typeof(T)].name);
+        return newUI;
     }
 
-    public void DestroyUI(UIBase page)
+    public void DestroyUI(UIBase ui)
     {
-        uiList.Remove(page);
-        Object.Destroy(page.gameObject);
-        page.OnDestroy();
+        uiList.Remove(ui);
+        pageStack.Remove(ui);
+        pageStack[pageStack.Count - 1].gameObject.SetActive(true);
+        KDebugLogger.UI_DebugLog(ui, ui.isPage);
+        Object.Destroy(ui.gameObject);
+        ui.OnDestroy();
     }
 
     public void DestroyFirstUIWithType<T>() where T : UIBase

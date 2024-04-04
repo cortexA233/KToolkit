@@ -34,11 +34,11 @@ public class UI_Info : Attribute
 
 public partial class UIManager
 {
-    private static Dictionary<Type, UI_Info> pageDict = new Dictionary<Type, UI_Info>();
+    private static Dictionary<Type, UI_Info> uiMap = new Dictionary<Type, UI_Info>();
     // 新建页面在此处注册
     private void InitPageDict()
     {
-        pageDict[typeof(GMPage)] = new UI_Info("GM/gm_page", "GMPage");
+        uiMap[typeof(GMPage)] = new UI_Info("GM/gm_page", "GMPage");
     }
     
     // 两种方式添加到字典中
@@ -50,8 +50,8 @@ public partial class UIManager
             .Where(type => type.GetCustomAttribute<UI_Info>() != null);
         foreach (var type in UIPagesType)
         {
-            if (!pageDict.ContainsKey(type)) // 简单判重
-                pageDict.Add(type,
+            if (!uiMap.ContainsKey(type)) // 简单判重
+                uiMap.Add(type,
                     new UI_Info(type.GetCustomAttribute<UI_Info>().prefabPath,
                         type.GetCustomAttribute<UI_Info>().name));
         }
