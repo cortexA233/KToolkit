@@ -38,7 +38,7 @@ public partial class UIManager
     // 新建页面在此处注册
     private void InitPageDict()
     {
-        uiMap[typeof(GMPage)] = new UI_Info("GM/gm_page", "GMPage");
+        // uiMap[typeof(GMPage)] = new UI_Info("GM/gm_page", "GMPage");
     }
     
     // 两种方式添加到字典中
