@@ -13,9 +13,12 @@ public static partial class KDebugLogger
         debuggerConfig["System"] = true;
         debuggerConfig["Player"] = true;
         debuggerConfig["Level"] = true;
+        
+        debuggerConfig["Cortex"] = true;
+        debuggerConfig["Veyo"] = false;
     }
 
-    public static string DebuggerConcatArgs(params object[] args)
+    private static string DebuggerConcatArgs(params object[] args)
     {
         string res = "";
         foreach (var item in args)

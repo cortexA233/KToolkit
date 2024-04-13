@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 public partial class UIManager : SingletonNoMono<UIManager>
 {
     private List<UIBase> uiList = new List<UIBase>();
-    private List<UIBase> pageStack = new List<UIBase>();
+    private List<UIPage> pageStack = new List<UIPage>();
     private static int singletonNum = 0;
     public UIManager()
     {
@@ -31,13 +31,10 @@ public partial class UIManager : SingletonNoMono<UIManager>
         newUI.InitParams(args);
         uiList.Add(newUI);
         newUI.OnStart();
-        if (newUI.isPage)
+        if (newUI is UIPage)
         {
-            // if (pageStack.Count > 0)
-            // {
-            //     pageStack[pageStack.Count - 1].gameObject.SetActive(false);
-            // }
-            pageStack.Add(newUI);
+            pageStack[pageStack.Count-1].Deactivate();
+            pageStack.Add((UIPage)(object)newUI);
         }
         KDebugLogger.UI_DebugLog("UI Create: ", uiMap[typeof(T)].name);
         return newUI;
@@ -46,9 +43,12 @@ public partial class UIManager : SingletonNoMono<UIManager>
     public void DestroyUI(UIBase ui)
     {
         uiList.Remove(ui);
-        pageStack.Remove(ui);
-        // pageStack[pageStack.Count - 1].gameObject.SetActive(true);
-        KDebugLogger.UI_DebugLog(ui, ui.isPage);
+        if (ui is UIPage)
+        {
+            pageStack.Remove((UIPage)ui);
+            pageStack[pageStack.Count-1].Activate();
+        }
+        KDebugLogger.UI_DebugLog(ui);
         Object.Destroy(ui.gameObject);
         ui.OnDestroy();
     }

@@ -5,7 +5,6 @@ using KToolkit;
 
 public abstract class UIBase : ObserverNoMono
 {
-    public bool isPage { get; protected set; } = false;
     // 和MonoBehavior的gameObject属性类似，在OnStart时初始化
     public GameObject gameObject;
     // 和MonoBehavior的transform属性类似，在OnStart时初始化
@@ -30,10 +29,15 @@ public abstract class UIBase : ObserverNoMono
 
 public abstract class UIPage : UIBase
 {
-    public override void OnStart()
+
+    public void Activate()
     {
-        base.OnStart();
-        isPage = true;
+        
+    }
+
+    public void Deactivate()
+    {
+        
     }
     
 }

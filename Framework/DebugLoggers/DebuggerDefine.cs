@@ -43,4 +43,14 @@ public static partial class KDebugLogger
         string res = "<color=green>System Log:</color> " + DebuggerConcatArgs(args);
         Debug.Log(res);
     }
+    
+    public static void Cortex_DebugLog(params object[] args)
+    {
+        if (!debuggerConfig["Cortex"])
+        {
+            return;
+        }
+        string res = "<color=green>cortex Log:</color> " + DebuggerConcatArgs(args);
+        Debug.Log(res);
+    }
 }
