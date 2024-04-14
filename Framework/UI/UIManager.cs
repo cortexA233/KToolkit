@@ -33,8 +33,12 @@ public partial class UIManager : SingletonNoMono<UIManager>
         newUI.OnStart();
         if (newUI is UIPage)
         {
-            pageStack[pageStack.Count-1].Deactivate();
+            if (pageStack.Count > 0)
+            {
+                pageStack[^1].Deactivate();
+            }
             pageStack.Add((UIPage)(object)newUI);
+            pageStack[^1].Activate();
         }
         KDebugLogger.UI_DebugLog("UI Create: ", uiMap[typeof(T)].name);
         return newUI;
@@ -46,7 +50,10 @@ public partial class UIManager : SingletonNoMono<UIManager>
         if (ui is UIPage)
         {
             pageStack.Remove((UIPage)ui);
-            pageStack[pageStack.Count-1].Activate();
+            if (pageStack.Count > 0)
+            {
+                pageStack[^1].Activate();
+            }
         }
         KDebugLogger.UI_DebugLog(ui);
         Object.Destroy(ui.gameObject);
