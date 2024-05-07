@@ -29,7 +29,7 @@ public class SingletonNoMono<T> : ObserverNoMono where T : SingletonNoMono<T>, n
         }
     }
 
-    public void Init()
+    public virtual void Init()
     {
         
     }

@@ -17,6 +17,10 @@ public abstract class UIBase : ObserverNoMono
     
     public override void DestroySelf()
     {
+        if (isDestroyed)
+        {
+            return;
+        }
         base.DestroySelf();
         UIManager.instance.DestroyUI(this);
     }

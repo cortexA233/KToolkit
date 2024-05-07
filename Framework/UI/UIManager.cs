@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 public partial class UIManager : SingletonNoMono<UIManager>
 {
     private List<UIBase> uiList = new List<UIBase>();
-    private List<UIPage> pageStack = new List<UIPage>();
+    // private List<UIPage> pageStack = new List<UIPage>();
     private static int singletonNum = 0;
     public UIManager()
     {
@@ -31,33 +31,34 @@ public partial class UIManager : SingletonNoMono<UIManager>
         newUI.InitParams(args);
         uiList.Add(newUI);
         newUI.OnStart();
-        if (newUI is UIPage)
-        {
-            if (pageStack.Count > 0)
-            {
-                pageStack[^1].Deactivate();
-            }
-            pageStack.Add((UIPage)(object)newUI);
-            pageStack[^1].Activate();
-        }
-        KDebugLogger.UI_DebugLog("UI Create: ", uiMap[typeof(T)].name);
+        // if (newUI is UIPage)
+        // {
+        //     if (pageStack.Count > 0)
+        //     {
+        //         pageStack[^1].Deactivate();
+        //     }
+        //     pageStack.Add((UIPage)(object)newUI);
+        //     pageStack[^1].Activate();
+        // }
+        KDebugLogger.UI_DebugLog("UI 创建: ", uiMap[typeof(T)].name);
         return newUI;
     }
 
     public void DestroyUI(UIBase ui)
     {
         uiList.Remove(ui);
-        if (ui is UIPage)
-        {
-            pageStack.Remove((UIPage)ui);
-            if (pageStack.Count > 0)
-            {
-                pageStack[^1].Activate();
-            }
-        }
-        KDebugLogger.UI_DebugLog(ui);
+        // if (ui is UIPage)
+        // {
+        //     pageStack.Remove((UIPage)ui);
+        //     if (pageStack.Count > 0)
+        //     {
+        //         pageStack[^1].Activate();
+        //     }
+        // }
+        KDebugLogger.UI_DebugLog("UI 销毁: ", ui);
         Object.Destroy(ui.gameObject);
         ui.OnDestroy();
+        ui.DestroySelf();
     }
 
     public void DestroyFirstUIWithType<T>() where T : UIBase
