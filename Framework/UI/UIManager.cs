@@ -61,6 +61,56 @@ public partial class UIManager : SingletonNoMono<UIManager>
         ui.DestroySelf();
     }
 
+    public void HideUI(UIBase ui)
+    {
+        ui.gameObject.SetActive(false);
+        // if (ui is UIPage)
+        // {
+        //     pageStack.Remove((UIPage)ui);
+        //     if (pageStack.Count > 0)
+        //     {
+        //         pageStack[^1].Activate();
+        //     }
+        // }
+        KDebugLogger.UI_DebugLog("UI 隐藏: ", ui);
+    }
+
+    public void HideAllUIWithType<T>() where T : UIBase
+    {
+        for (int i = uiList.Count - 1; i >= 0; i--)
+        {
+            if (uiList[i].GetType() == typeof(T))
+            {
+                HideUI(uiList[i]);
+            }
+        }
+    }
+
+    public void ShowUI(UIBase ui)
+    {
+        ui.gameObject.SetActive(true);
+        // if (ui is UIPage)
+        // {
+        //     pageStack.Remove((UIPage)ui);
+        //     if (pageStack.Count > 0)
+        //     {
+        //         pageStack[^1].Activate();
+        //     }
+        // }
+        KDebugLogger.UI_DebugLog("UI 重新显示: ", ui);
+    }
+
+    public void ShowAllUIWithType<T>() where T : UIBase
+    {
+        for (int i = uiList.Count - 1; i >= 0; i--)
+        {
+            if (uiList[i].GetType() == typeof(T))
+            {
+                ShowUI(uiList[i]);
+            }
+        }
+    }
+    
     public void DestroyFirstUIWithType<T>() where T : UIBase
     {
         for (int i = uiList.Count - 1; i >= 0; i--)
