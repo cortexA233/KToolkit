@@ -9,10 +9,24 @@ public abstract class UIBase : ObserverNoMono
     public GameObject gameObject;
     // 和MonoBehavior的transform属性类似，在OnStart时初始化
     public Transform transform;
+
+    protected List<UICell> childCellPool = new List<UICell>();
     
-    public virtual void InitParams(params object[] args)
+    public virtual void InitParams(params object[] args) {}
+
+    public virtual void SetVisible(bool state)
     {
-        
+        gameObject.SetActive(state);
+    }
+
+    protected void CreateUICell<T>(Transform parent=null, params object[] args) where T : UICell, new()
+    {
+        T newCell = UIManager.instance.CreateUI<T>(args);
+        if (parent)
+        {
+            newCell.transform.SetParent(parent);
+        }
+        childCellPool.Add(newCell);
     }
     
     public override void DestroySelf()
@@ -21,6 +35,11 @@ public abstract class UIBase : ObserverNoMono
         {
             return;
         }
+
+        for (int i = 0; i < childCellPool.Count; ++i)
+        {
+            childCellPool[i].DestroySelf();
+        }
         base.DestroySelf();
         UIManager.instance.DestroyUI(this);
     }
@@ -28,6 +47,12 @@ public abstract class UIBase : ObserverNoMono
     public virtual void OnStart() {}
     public virtual void OnDestroy() {}
     public virtual void Update() {}
+}
+
+
+public abstract class UICell : UIBase
+{
+    
 }
 
 

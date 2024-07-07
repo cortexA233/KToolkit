@@ -8,6 +8,12 @@ using Object = UnityEngine.Object;
 public partial class UIManager : SingletonNoMono<UIManager>
 {
     private List<UIBase> uiList = new List<UIBase>();
+
+    public List<UIBase> DebugGetUIList()
+    {
+        return uiList;
+    }
+
     // private List<UIPage> pageStack = new List<UIPage>();
     private static int singletonNum = 0;
     public UIManager()
@@ -56,8 +62,8 @@ public partial class UIManager : SingletonNoMono<UIManager>
         //     }
         // }
         KDebugLogger.UI_DebugLog("UI 销毁: ", ui);
-        Object.Destroy(ui.gameObject);
         ui.OnDestroy();
+        Object.Destroy(ui.gameObject);
         ui.DestroySelf();
     }
 
@@ -107,6 +113,11 @@ public partial class UIManager : SingletonNoMono<UIManager>
     public Camera GetUICamera()
     {
         return GameObject.Find("UICamera").GetComponent<Camera>();
+    }
+
+    public Canvas GetCanvas()
+    {
+        return GameObject.Find("Canvas").GetComponent<Canvas>();
     }
 
     public void Update()
