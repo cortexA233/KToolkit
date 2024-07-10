@@ -44,9 +44,29 @@ public static partial class KDebugLogger
         Debug.Log(res);
     }
     
+    public static void Error_DebugLog(params object[] args)
+    {
+        // if (!debuggerConfig["System"])
+        // {
+        //     return;
+        // }
+        string res = "<color=red>Error Log:</color> " + DebuggerConcatArgs(args);
+        Debug.Log(res);
+    }
+    
     public static void Cortex_DebugLog(params object[] args)
     {
         if (!debuggerConfig["Cortex"])
+        {
+            return;
+        }
+        string res = "<color=green>cortex Log:</color> " + DebuggerConcatArgs(args);
+        Debug.Log(res);
+    }
+
+    public static void Fei_DebugLog(params object[] args)
+    {
+        if (!debuggerConfig["Veyo"])
         {
             return;
         }

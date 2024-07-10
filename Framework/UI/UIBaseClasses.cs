@@ -26,9 +26,13 @@ public abstract class UIBase : ObserverNoMono
         {
             newCell.transform.SetParent(parent);
         }
+        else
+        {
+            newCell.transform.SetParent(this.transform);
+        }
         childCellPool.Add(newCell);
     }
-    
+
     public override void DestroySelf()
     {
         if (isDestroyed)
@@ -50,6 +54,7 @@ public abstract class UIBase : ObserverNoMono
 }
 
 
+// public abstract class UICell : UIBase
 public abstract class UICell : UIBase
 {
     

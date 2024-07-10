@@ -10,6 +10,11 @@ public static class EventManager
     private static Dictionary<EventName, List<Observer>> observers = new Dictionary<EventName, List<Observer>>();
     private static Dictionary<EventName, List<ObserverNoMono>> observersNoMono = new Dictionary<EventName, List<ObserverNoMono>>();
 
+    public static int DebugGetObserverCount()
+    {
+        return observers.Count + observersNoMono.Count;
+    }
+    
     public static void DeleteObserver(ObserverNoMono observer)
     {
         foreach (var item in observersNoMono)
