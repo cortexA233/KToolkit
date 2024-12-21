@@ -19,7 +19,7 @@ public abstract class UIBase : ObserverNoMono
         gameObject.SetActive(state);
     }
 
-    protected void CreateUICell<T>(Transform parent=null, params object[] args) where T : UICell, new()
+    protected T CreateUICell<T>(Transform parent=null, params object[] args) where T : UICell, new()
     {
         T newCell = UIManager.instance.CreateUI<T>(args);
         if (parent)
@@ -31,6 +31,7 @@ public abstract class UIBase : ObserverNoMono
             newCell.transform.SetParent(this.transform);
         }
         childCellPool.Add(newCell);
+        return newCell;
     }
 
     public override void DestroySelf()
