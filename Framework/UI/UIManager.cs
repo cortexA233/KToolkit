@@ -153,7 +153,11 @@ public partial class UIManager : SingletonNoMono<UIManager>
     {
         for (int i = uiList.Count - 1; i >= 0; i--)
         {
-            if (uiList[i].GetType() == typeof(T))
+            if (i > uiList.Count - 1)
+            {
+                continue;
+            }
+            if (uiList[i] is not null && uiList[i].GetType() == typeof(T))
             {
                 DestroyUI(uiList[i]);
             }
