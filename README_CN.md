@@ -41,7 +41,7 @@
 * UIBasePage继承自ObserverNoMono类。事实上，如非特别说明，所有的类都应该继承自Observer或ObserverNoMono类
 * 目前功能还没那么多，对于比较复杂的UI逻辑还没有规范化的通用逻辑（UI层面主要是复杂列表需要通用化，如果未来页面的数据处理业务比较复杂，应该单分出来一个UIBasePage内的新成员来管理数据）。后续有这方面需求或者新需求（如层级划分，排序，通用对话框等）也会继续在里面完善。
 
-# 自制简易状态机
+# 状态机
 
 ## 主要文件/类
 * StateMachineLib.cs，内含抽象的BaseState类（状态类），和BaseFSM类（FSM即Finite State Machine，有限状态机）。
