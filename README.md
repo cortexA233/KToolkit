@@ -34,7 +34,7 @@ Register the new page type in PageEnum.cs following the example format.
 * UIBasePage inherits from ObserverNoMono class. In fact, unless otherwise specified, all classes should inherit from Observer or ObserverNoMono.
 Currently, there are not many features. There is no standardized logic for more complex UI interactions (mainly for complex lists that need to be generalized; if future pages require complex data handling, a new member in UIBasePage should be created to manage the data). Future updates will continue to improve this based on new requirements (like hierarchy divisions, sorting, generic dialogs, etc.).
 
-# Custom Simple State Machine
+# State Machine
 ## Main Files/Classes
 * StateMachineLib.cs: Contains the abstract BaseState class (state class) and BaseFSM class (FSM, Finite State Machine).
 Usage
