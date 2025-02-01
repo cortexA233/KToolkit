@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static partial class KDebugLogger
 {
-    private static Dictionary<string, bool> debuggerConfig = new Dictionary<string, bool>();
+    public static Dictionary<string, bool> debuggerConfig = new Dictionary<string, bool>();
 
     static KDebugLogger()
     {
@@ -16,6 +16,7 @@ public static partial class KDebugLogger
         
         debuggerConfig["Cortex"] = true;
         debuggerConfig["Veyo"] = false;
+        debuggerConfig["Shin"] = true;
     }
 
     private static string DebuggerConcatArgs(params object[] args)

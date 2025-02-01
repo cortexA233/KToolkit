@@ -22,11 +22,11 @@ Originated from the indie game "Exp10sion"
 # UI Framework
 ## Main Files/Classes
 * UIBasePage Class: The base class for all UI pages. Each UI page should inherit from this base class and register the custom page type in PageEnum.cs.
-* UIManager Class: The UIManager.cs file defines external interfaces for various UI operations. The PageEnum.cs file defines an enumeration for all UI pages. Each element of this enum should contain the prefab path (relative to the Resources directory) and the UI name.
+* KUIManager Class: The KUIManager.cs file defines external interfaces for various UI operations. The PageEnum.cs file defines an enumeration for all UI pages. Each element of this enum should contain the prefab path (relative to the Resources directory) and the UI name.
 ## Usage
 * When creating a new UI page, first create your page class and inherit from UIBasePage.
 Register the new page type in PageEnum.cs following the example format.
-* To create a page, call UIManager.CreateUI<xxxPage>(xxx parameters). To destroy a page, call UIManager.DestroyUI<xxxPage>().
+* To create a page, call KUIManager.CreateUI<xxxPage>(xxx parameters). To destroy a page, call KUIManager.DestroyUI<xxxPage>().
 * UIBasePage's onStart, onDestroy, and InitParams functions are virtual methods and should be overridden as needed. InitParams is used to receive data passed to the UI, while onStart and onDestroy are called when the UI is created or destroyed.
 ## TODO: Example
 * Under construction......

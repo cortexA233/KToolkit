@@ -6,6 +6,7 @@ public static partial class KDebugLogger
 {
     public static void UI_DebugLog(params object[] args)
     {
+        return;
         if (!debuggerConfig["UI"])
         {
             return;
@@ -71,6 +72,28 @@ public static partial class KDebugLogger
             return;
         }
         string res = "<color=green>cortex Log:</color> " + DebuggerConcatArgs(args);
+        Debug.Log(res);
+    }
+    
+    public static void Shin_DebugLog(params object[] args)
+    {
+        if (!debuggerConfig["Shin"])
+        {
+            return;
+        }
+        
+        string res = "<color=grey>Shin Log:</color> " + DebuggerConcatArgs(args);
+        Debug.Log(res);
+    }
+
+    public static void WXT_DebugLog(params object[] args)
+    {
+        if (!debuggerConfig["Shin"])
+        {
+            return;
+        }
+
+        string res = "<color=red>WXT Log:</color> " + DebuggerConcatArgs(args);
         Debug.Log(res);
     }
 }

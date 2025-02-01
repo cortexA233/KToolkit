@@ -23,13 +23,13 @@
 
 ## 主要文件/类
 * UIBasePage类：所有UI页面的基类，每一个单独的UI页面都应继承这个基类，并且将自定义页面的类型注册到PageEnum.cs文件里。
-* UIManager类：在UIManager.cs文件中定义了各类外部接口，在PageEnums.cs文件里定义了所有的UIPage的枚举，这个枚举的元素应该包含UI的prefab路径（相对于Resources目录）和UI的名字。
+* KUIManager类：在KUIManager.cs文件中定义了各类外部接口，在PageEnums.cs文件里定义了所有的UIPage的枚举，这个枚举的元素应该包含UI的prefab路径（相对于Resources目录）和UI的名字。
 
 
 ## 用法
 * 如上，当你需要新建一个UI页面时，首先新建一个自己的页面类，并继承UIBasePage
 * 在PageEnum.cs中按照示例的格式注册新页面类型
-* 在需要创建页面时，调用UIManager.CreateUI<xxxPage>(xxx参数)；在需要销毁页面时，调用UIManager.DestroyUI<xxxPage>()即可
+* 在需要创建页面时，调用KUIManager.CreateUI<xxxPage>(xxx参数)；在需要销毁页面时，调用KUIManager.DestroyUI<xxxPage>()即可
 * UIBasePage的onStart，onDestroy和InitParams函数为虚函数，应根据需要做重载。其中InitParam用于接收UI传入的数据，onStart，onDestroy分别会在UI被创建和销毁时调用
 
 

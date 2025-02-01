@@ -6,7 +6,7 @@ using System.Reflection;
 using UnityEngine;
 
 /// <summary>
-/// 使用这个特性可以自动加进UIManager的pageDict当中
+/// 使用这个特性可以自动加进KUIManager的pageDict当中
 /// </summary>
 public class UI_Info : Attribute
 {
@@ -32,13 +32,18 @@ public class UI_Info : Attribute
     }
 }
 
-public partial class UIManager
+public partial class KUIManager
 {
     private static Dictionary<Type, UI_Info> uiMap = new Dictionary<Type, UI_Info>();
     // 新建页面在此处注册
     private void InitPageDict()
     {
         // uiMap[typeof(GMPage)] = new UI_Info("GM/gm_page", "GMPage");
+        uiMap[typeof(PlayerStatusPage)] = new UI_Info("player_status", "PlayerStatusPage");
+        uiMap[typeof(LevelExpGaugeUI)] = new UI_Info("exp_gauge", "LevelExpGaugeUI");
+        uiMap[typeof(LevelUpEnhancePage)] = new UI_Info("level_up_selection", "LevelUpEnhancePage");
+        uiMap[typeof(CommonLifeBarUI)] = new UI_Info("life_bar_ui", "CommonLifeBarUI");
+        uiMap[typeof(CommonBulletCountUI)] = new UI_Info("bullet_count_ui", "CommonBulletCountUI");
     }
     
     // 两种方式添加到字典中

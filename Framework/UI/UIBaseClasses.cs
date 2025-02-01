@@ -21,7 +21,17 @@ public abstract class UIBase : ObserverNoMono
 
     protected T CreateUICell<T>(Transform parent=null, params object[] args) where T : UICell, new()
     {
-        T newCell = UIManager.instance.CreateUI<T>(args);
+        T newCell = KUIManager.instance.CreateUI<T>(args);
+        
+        // todo 这里应该改成把cell和base区分开的
+        // var newCell = new T();
+        // newCell.gameObject = GameObject.Instantiate(Resources.Load<GameObject>(uiMap[typeof(T)].prefabPath),
+        //     GameObject.Find("Canvas").transform);
+        // newUI.transform = newUI.gameObject.transform;
+        // newUI.InitParams(args);
+        // uiList.Add(newUI);
+        // newUI.OnStart();
+        
         if (parent)
         {
             newCell.transform.SetParent(parent);
@@ -46,7 +56,7 @@ public abstract class UIBase : ObserverNoMono
             childCellPool[i].DestroySelf();
         }
         base.DestroySelf();
-        UIManager.instance.DestroyUI(this);
+        KUIManager.instance.DestroyUI(this);
     }
     
     public virtual void OnStart() {}

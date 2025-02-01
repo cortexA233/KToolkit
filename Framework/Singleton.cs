@@ -6,17 +6,43 @@ using KToolkit;
 
 public class Singleton<T> : Observer where T: Singleton<T>, new()
 {
-    public static T instance;
+    private static T _instance;
+
+    // public static T instance;
+    public static T instance
+    {
+        get
+        {
+            // 确保只创建一个实例
+            if (_instance == null)
+            {
+                // 查找现有的 GameManager 实例
+                _instance = FindObjectOfType<T>();
+
+                // 如果没有找到，则创建一个新的
+                if (_instance == null)
+                {
+                    string objectName = typeof(T).Name;
+                    GameObject instanceObject = new GameObject(objectName);
+                    _instance = instanceObject.AddComponent<T>();
+                    DontDestroyOnLoad(instanceObject); // 确保跨场景不会销毁
+                }
+            }
+
+            return _instance;
+        }
+    }
+        
     protected virtual void Awake()
     {
-        instance = (T)this;
+        _instance = (T)this;
     }
 }
 
 
 public class SingletonNoMono<T> : ObserverNoMono where T : SingletonNoMono<T>, new()
 {
-    protected static T _instance;
+    private static T _instance;
     public static T instance
     {
         get
