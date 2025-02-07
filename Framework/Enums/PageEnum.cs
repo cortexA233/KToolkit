@@ -39,16 +39,9 @@ namespace KToolkit
     public partial class KUIManager
     {
         private static Dictionary<Type, UI_Info> uiMap = new Dictionary<Type, UI_Info>();
+        
         // 新建页面在此处注册
-        private void InitPageDict()
-        {
-            // uiMap[typeof(GMPage)] = new UI_Info("GM/gm_page", "GMPage");
-            uiMap[typeof(PlayerStatusPage)] = new UI_Info("player_status", "PlayerStatusPage");
-            uiMap[typeof(LevelExpGaugeUI)] = new UI_Info("exp_gauge", "LevelExpGaugeUI");
-            uiMap[typeof(LevelUpEnhancePage)] = new UI_Info("level_up_selection", "LevelUpEnhancePage");
-            uiMap[typeof(CommonLifeBarUI)] = new UI_Info("life_bar_ui", "CommonLifeBarUI");
-            uiMap[typeof(CommonBulletCountUI)] = new UI_Info("bullet_count_ui", "CommonBulletCountUI");
-        }
+        private partial void InitPageDict();
         
         // 两种方式添加到字典中
         private void AutoInitPageDict()
