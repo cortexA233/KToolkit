@@ -18,10 +18,10 @@ public abstract class BaseState
 }
 
 
-public abstract class BaseFSM : ObserverNoMono
+public abstract class BaseFSM : KObserverNoMono
 {
     public BaseState currentState { protected set; get; }
-    // protected StateMachineEventObserver eventObserver = new StateMachineEventObserver();
+    // protected StateMachineEventKObserver eventKObserver = new StateMachineEventKObserver();
 
     public void TransitState(BaseState newState)
     {
@@ -32,7 +32,7 @@ public abstract class BaseFSM : ObserverNoMono
 }
 
 
-// public class StateMachineEventObserver : ObserverNoMono
+// public class StateMachineEventKObserver : KObserverNoMono
 // {
 //     public 
 // }

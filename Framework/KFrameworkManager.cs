@@ -2,26 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using KToolkit;
 
 
-public class KFrameworkManager : Singleton<KFrameworkManager>
+namespace KToolkit
 {
-    private GameObject frameworkManagerObject;
+    public class KFrameworkManager : KSingleton<KFrameworkManager>
+    {
+        private GameObject frameworkManagerObject;
     
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+        protected override void Awake()
+        {
+            base.Awake();
+        }
 
-    public virtual void InitKFramework()
-    {
+        public virtual void InitKFramework()
+        {
         
+        }
+
+        private void Update()
+        {
+            KUIManager.instance.Update();
+            KTimerManager.instance.Update();
+        }
     }
 
-    private void Update()
-    {
-        KUIManager.instance.Update();
-        KTimerManager.instance.Update();
-    }
 }

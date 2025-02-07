@@ -5,60 +5,66 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-/// <summary>
-/// 使用这个特性可以自动加进KUIManager的pageDict当中
-/// </summary>
-public class UI_Info : Attribute
-{
-    public string prefabPath;
-    public string name;
 
+namespace KToolkit
+{
+        
     /// <summary>
-    /// 初始化
+    /// 使用这个特性可以自动加进KUIManager的pageDict当中
     /// </summary>
-    /// <param name="path">预制体相对于Resources/UIPrefabs的目录</param>
-    /// <param name="uiName">UI的名字，一般是类名</param>
-    public UI_Info(string path, string uiName)
+    public class UI_Info : Attribute
     {
-        if (!path.StartsWith("UI_prefabs/"))
-        {
-            prefabPath = "UI_prefabs/" + path;
-        }
-        else
-        {
-            prefabPath = path;
-        }
-        name = uiName;
-    }
-}
+        public string prefabPath;
+        public string name;
 
-public partial class KUIManager
-{
-    private static Dictionary<Type, UI_Info> uiMap = new Dictionary<Type, UI_Info>();
-    // 新建页面在此处注册
-    private void InitPageDict()
-    {
-        // uiMap[typeof(GMPage)] = new UI_Info("GM/gm_page", "GMPage");
-        uiMap[typeof(PlayerStatusPage)] = new UI_Info("player_status", "PlayerStatusPage");
-        uiMap[typeof(LevelExpGaugeUI)] = new UI_Info("exp_gauge", "LevelExpGaugeUI");
-        uiMap[typeof(LevelUpEnhancePage)] = new UI_Info("level_up_selection", "LevelUpEnhancePage");
-        uiMap[typeof(CommonLifeBarUI)] = new UI_Info("life_bar_ui", "CommonLifeBarUI");
-        uiMap[typeof(CommonBulletCountUI)] = new UI_Info("bullet_count_ui", "CommonBulletCountUI");
-    }
-    
-    // 两种方式添加到字典中
-    private void AutoInitPageDict()
-    {
-        var UIPagesType = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(x => x.GetTypes())
-            .Where(type => type.IsSubclassOf(typeof(UIBase)))
-            .Where(type => type.GetCustomAttribute<UI_Info>() != null);
-        foreach (var type in UIPagesType)
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="path">预制体相对于Resources/UIPrefabs的目录</param>
+        /// <param name="uiName">UI的名字，一般是类名</param>
+        public UI_Info(string path, string uiName)
         {
-            if (!uiMap.ContainsKey(type)) // 简单判重
-                uiMap.Add(type,
-                    new UI_Info(type.GetCustomAttribute<UI_Info>().prefabPath,
-                        type.GetCustomAttribute<UI_Info>().name));
+            if (!path.StartsWith("UI_prefabs/"))
+            {
+                prefabPath = "UI_prefabs/" + path;
+            }
+            else
+            {
+                prefabPath = path;
+            }
+            name = uiName;
         }
     }
+
+    public partial class KUIManager
+    {
+        private static Dictionary<Type, UI_Info> uiMap = new Dictionary<Type, UI_Info>();
+        // 新建页面在此处注册
+        private void InitPageDict()
+        {
+            // uiMap[typeof(GMPage)] = new UI_Info("GM/gm_page", "GMPage");
+            uiMap[typeof(PlayerStatusPage)] = new UI_Info("player_status", "PlayerStatusPage");
+            uiMap[typeof(LevelExpGaugeUI)] = new UI_Info("exp_gauge", "LevelExpGaugeUI");
+            uiMap[typeof(LevelUpEnhancePage)] = new UI_Info("level_up_selection", "LevelUpEnhancePage");
+            uiMap[typeof(CommonLifeBarUI)] = new UI_Info("life_bar_ui", "CommonLifeBarUI");
+            uiMap[typeof(CommonBulletCountUI)] = new UI_Info("bullet_count_ui", "CommonBulletCountUI");
+        }
+        
+        // 两种方式添加到字典中
+        private void AutoInitPageDict()
+        {
+            var UIPagesType = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(x => x.GetTypes())
+                .Where(type => type.IsSubclassOf(typeof(UIBase)))
+                .Where(type => type.GetCustomAttribute<UI_Info>() != null);
+            foreach (var type in UIPagesType)
+            {
+                if (!uiMap.ContainsKey(type)) // 简单判重
+                    uiMap.Add(type,
+                        new UI_Info(type.GetCustomAttribute<UI_Info>().prefabPath,
+                            type.GetCustomAttribute<UI_Info>().name));
+            }
+        }
+    }
+
 }

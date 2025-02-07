@@ -5,7 +5,10 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 
-public partial class KUIManager : SingletonNoMono<KUIManager>
+namespace KToolkit
+{
+    
+public partial class KUIManager : KSingletonNoMono<KUIManager>
 {
     private List<UIBase> uiList = new List<UIBase>();
 
@@ -184,4 +187,6 @@ public partial class KUIManager : SingletonNoMono<KUIManager>
             }
         }
     }
+}
+
 }
